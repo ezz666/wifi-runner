@@ -29,10 +29,10 @@ def script_run(name,action):
     if name in conf:
         if action in conf[name]:
             script = conf[name][action]
-            if s[0]!='/':
+            if script[0]!='/':
                 script = os.path.join(path,script)
             try:
-                subprocess.Popen(script,stdout=sys.stdout,stderr=sys.syderr)
+                subprocess.Popen(script.split(),stdout=sys.stdout,stderr=sys.stderr)
             except OSError:
                 print "Something went wrong with script", script
 
@@ -46,10 +46,11 @@ def hand_func(pname, value):
     script_run(default,action)
     if (value==0): name = None
 
-conf = ParseConfig("./wifi-runner.conf")
+conf_name="/home/nemo/.config/systemd/scripts/wifi-runner.conf"
+conf = ParseConfig(conf_name)
 default = "                 Default                  "
 import os.path
-path = os.path.dirpath(os.path.abspath(conf))
+path = os.path.dirname(os.path.abspath(conf_name))
 
 import dbus,subprocess,sys
 import gi.overrides.GObject as gobject
