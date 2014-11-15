@@ -24,6 +24,9 @@ It's name and path are hardcoded in wifi-runner.py so
 after installation it's worth to check it is correct.
 
 Each section name corresponds to SSID of the network.
+Default section corresponds to scripts that runned for all wifi networks.
+It's name consists of 42 charactes so it won't correspond to any correct SSID (the limit is 32).
+
 For example if we want to start script ./test.py
 when wifi with SSID 'TEST' stops and start.sh when it starts
 we can just add in the end of the file
