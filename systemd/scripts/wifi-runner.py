@@ -4,7 +4,7 @@ def ParseConfig(config_name):
     cf = ConfigParser.ConfigParser()
     cf.read(config_name)
     result_dict = {}
-    for sec in cf.Sections():
+    for sec in cf.sections():
         result_dict[sec] = {}
         for opt in cf.options(sec):
             result_dict[sec][opt] = cf.get(sec,opt)
@@ -25,10 +25,16 @@ def GetServiceName():
     return None
 
 def script_run(name,action):
-    global conf
+    global conf,path
     if name in conf:
         if action in conf[name]:
-            subprocess.Popen(conf[name][action],stdout=sys.stdout)
+            script = conf[name][action]
+            if s[0]!='/':
+                script = os.path.join(path,script)
+            try:
+                subprocess.Popen(script,stdout=sys.stdout,stderr=sys.syderr)
+            except OSError:
+                print "Something went wrong with script", script
 
 def hand_func(pname, value):
     global name, default
@@ -42,6 +48,9 @@ def hand_func(pname, value):
 
 conf = ParseConfig("./wifi-runner.conf")
 default = "                 Default                  "
+import os.path
+path = os.path.dirpath(os.path.abspath(conf))
+
 import dbus,subprocess,sys
 import gi.overrides.GObject as gobject
 from dbus.mainloop.glib import DBusGMainLoop
