@@ -38,6 +38,6 @@ start = start.sh
 stop  = test.py
 
 
-Paths to scripts can be relative to config file or an absolute one.
+Paths to scripts can be relative to config file or the absolute ones.
 
 Script and configuration that auto authorize you in Moscow Metro Free Wifi are included.
