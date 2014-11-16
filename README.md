@@ -32,8 +32,11 @@ when wifi with SSID 'TEST' stops and start.sh when it starts
 we can just add in the end of the file
 
 [TEST]
+
 start = start.sh
+
 stop  = test.py
+
 
 Paths to scripts can be relative to config file or an absolute one.
 
